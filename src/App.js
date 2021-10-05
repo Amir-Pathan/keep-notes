@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import React,{ useCallback, useEffect } from 'react';
 import './App.css';
+import Routing from './component/routing'
+import {Provider} from 'react-redux'
+import store from './redux/store'
 
 function App() {
+
+  const notes = []
+
+  useCallback(()=>{
+    localStorage.setItem('notes',JSON.stringify(notes))
+    localStorage.setItem('fnotes',JSON.stringify(notes))
+  },[])
+
+  useEffect(()=>{
+    document.title='Keep-Notes'
+  },[])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Provider store={store}>
+          <Routing/>
+      </Provider>
     </div>
   );
 }
