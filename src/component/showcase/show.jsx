@@ -46,6 +46,12 @@ function Show(){
 
     const dlt=()=>{
         dispatch(deleting(data.title))
+        const indx= fvt.findIndex((i)=>{
+            return i.title===data.title
+        })
+        if(indx!==-1){
+            dispatch(removefromfavorite(data.title))
+        }
         history.push('/')
     }
 
